@@ -11,7 +11,7 @@
       class="bg-white w-[60vw] h-20 flex items-center px-8 gap-10 rounded-sm shadow-black shadow-sm/20"
     >
       <input
-        class="bg-[#fbfcfb] w-[40vw] h-13 border-gray-300 border-1 rounded-sm placeholder:text-[#7ca88a] px-4"
+        class="bg-[#fbfcfb] w-[40vw] h-13 border-gray-300 border rounded-sm placeholder:text-[#7ca88a] px-4"
         type="text"
         name="item"
         placeholder="Digite o produto que deseja adicionar:"
@@ -22,6 +22,14 @@
         class="bg-[#2bc16a] w-[15vw] h-13 rounded-sm text-white font-semibold text-[1.3rem]"
       >
         Adicionar
+      </button>
+
+      <button
+        type="button"
+        class="bg-[#FF4D4D] w-[15vw] h-13 rounded-sm text-white font-semibold text-[1.3rem]"
+        (click)="limparLista()"
+      >
+        Limpar lista
       </button>
     </div>
 
@@ -34,14 +42,16 @@
 
       <div class="flex flex-col w-full px-20">
         @for (elemento of lista; track elemento.id) {
-          <div class="flex justify-between h-15 px-12 items-center ">
+          <div class="flex justify-between h-15 px-12 items-center">
             <p>{{ elemento.id }}</p>
-            <p>{{ elemento.nome }}</p>
-            <input type="checkbox" />
+            <p>
+              <span [ngClass]="{ 'line-through ': elemento.comprado }"> {{ elemento.nome }} </span>
+            </p>
+            <input type="checkbox" [checked]="elemento.comprado" (click)="riscarItem(elemento)" />
           </div>
         } @empty {
           <div class="flex items-center justify-center w-full h-12">
-            <p class="text-[#2bc16a] font-bold text-[1.1rem]"> Nenhum elemento na lista! </p>
+            <p class="text-[#2bc16a] font-bold text-[1.1rem]">Nenhum elemento na lista!</p>
           </div>
         }
       </div>
