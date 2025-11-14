@@ -1,1 +1,50 @@
-<p>lista works!</p>
+<main class="h-screen bg-[#f6faf7] flex gap-6 justify-center items-center">
+  <form
+    action=""
+    class="flex flex-col items-center gap-8 m-8"
+    #frm="ngForm"
+    (ngSubmit)="adicionarItem()"
+  >
+    <h1 class="text-center text-[2.5rem] font-bold text-[#2bc16a]">Lista de compras</h1>
+
+    <div
+      class="bg-white w-[60vw] h-20 flex items-center px-8 gap-10 rounded-sm shadow-black shadow-sm/20"
+    >
+      <input
+        class="bg-[#fbfcfb] w-[40vw] h-13 border-gray-300 border-1 rounded-sm placeholder:text-[#7ca88a] px-4"
+        type="text"
+        name="item"
+        placeholder="Digite o produto que deseja adicionar:"
+        [(ngModel)]="item"
+      />
+      <button
+        type="submit"
+        class="bg-[#2bc16a] w-[15vw] h-13 rounded-sm text-white font-semibold text-[1.3rem]"
+      >
+        Adicionar
+      </button>
+    </div>
+
+    <table class="bg-white w-full rounded-sm shadow-md">
+      <thead class="bg-[#2bc16a] h-12 text-white text-[1.1rem] flex justify-evenly items-center">
+        <th class="">#</th>
+        <th class="">Produto</th>
+        <th class="">Comprado</th>
+      </thead>
+
+      <div class="flex flex-col w-full px-20">
+        @for (elemento of lista; track elemento.id) {
+          <div class="flex justify-between h-15 px-12 items-center ">
+            <p>{{ elemento.id }}</p>
+            <p>{{ elemento.nome }}</p>
+            <input type="checkbox" />
+          </div>
+        } @empty {
+          <div class="flex items-center justify-center w-full h-12">
+            <p class="text-[#2bc16a] font-bold text-[1.1rem]"> Nenhum elemento na lista! </p>
+          </div>
+        }
+      </div>
+    </table>
+  </form>
+</main>
